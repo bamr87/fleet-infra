@@ -20,6 +20,13 @@ concurrency:
 jobs:
   ci:
     uses: bamr87/bamr87/.github/workflows/standard-ci.yml@v2
-    with:
-      test-command: "helm lint charts/fleet-base && helm template charts/fleet-base >/dev/null"
     secrets: inherit
+
+  # Stack-specific build/test (standard-ci@v2 auto-detects node/python/ruby only).
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/setup-helm@v4
+      - run: 'helm lint charts/fleet-base && helm template charts/fleet-base >/dev/null'
