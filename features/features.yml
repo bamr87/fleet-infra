@@ -1,0 +1,78 @@
+# features/features.yml — THE FEATURE INDEX for fleet-infra (schema features/v1, governance kit v0.1.1).
+# One entry per capability, stable id FINFRA-NNN (never reused). status: shipped | partial | planned | deprecated | tbd.
+# `prd:` links each feature to PRD.md requirements. The PRD "Feature catalog" block is generated:
+#   python3 <bamr87/bamr87>/tools/governance_lint.py prd-sync . --write
+schema: features/v1
+repo: bamr87/fleet-infra
+
+features:
+  - id: FINFRA-001
+    title: "Terraform root module validates and plans with no cloud credentials (l"
+    description: "Terraform root module validates and plans with no cloud credentials (local backend)."
+    implemented: true
+    status: shipped
+    prd: [FR1]
+    surface: infra
+    link: main.tf
+    tags: [phase-1]
+    date: 2026-10-28
+  - id: FINFRA-002
+    title: "A base Helm chart lints cleanly and renders a namespace + deployment"
+    description: "A base Helm chart lints cleanly and renders a namespace + deployment."
+    implemented: false
+    status: planned
+    prd: [FR2]
+    surface: infra
+    docs: PRD.md
+    tags: [phase-1]
+    date: 2026-10-28
+  - id: FINFRA-003
+    title: "k3s cluster provisioning module for a local VM (multipass/libvirt)"
+    description: "k3s cluster provisioning module for a local VM (multipass/libvirt)."
+    implemented: false
+    status: planned
+    prd: [FR3]
+    surface: infra
+    docs: PRD.md
+    tags: [phase-2]
+    date: 2026-10-28
+  - id: FINFRA-004
+    title: "GitOps controller bootstrap that reconciles charts/ from main"
+    description: "GitOps controller bootstrap that reconciles charts/ from main."
+    implemented: false
+    status: planned
+    prd: [FR4]
+    surface: infra
+    docs: PRD.md
+    tags: [phase-2]
+    date: 2026-10-28
+  - id: FINFRA-005
+    title: "Per-service Helm charts for fleet apps (ragio-ai, fredgar-ai)"
+    description: "Per-service Helm charts for fleet apps (ragio-ai, fredgar-ai)."
+    implemented: false
+    status: planned
+    prd: [FR5]
+    surface: infra
+    docs: PRD.md
+    tags: [phase-3]
+    date: 2026-10-28
+  - id: FINFRA-006
+    title: "Secrets management via SOPS/age, never plaintext in git"
+    description: "Secrets management via SOPS/age, never plaintext in git."
+    implemented: false
+    status: planned
+    prd: [FR6]
+    surface: infra
+    docs: PRD.md
+    tags: [phase-3]
+    date: 2026-10-28
+  - id: FINFRA-007
+    title: "Standard CI gate"
+    description: "Every push and PR runs the fleet's shared standard-ci gate."
+    implemented: true
+    status: shipped
+    prd: [NFR1]
+    surface: infra
+    link: .github/workflows/ci.yml
+    tags: [ci]
+    date: 2026-10-28

@@ -1,0 +1,19 @@
+# OS / editors
+.DS_Store
+*.swp
+.idea/
+
+# env & secrets
+.env
+.env.*
+!.env.example
+
+# agent artifacts
+pr-result.txt
+
+# language
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+.terraform.lock.hcl

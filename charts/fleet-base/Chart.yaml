@@ -1,0 +1,6 @@
+apiVersion: v2
+name: fleet-base
+description: Base namespace and placeholder workload for the bamr87 fleet
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
