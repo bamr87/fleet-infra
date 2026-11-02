@@ -23,7 +23,8 @@ helm lint charts/fleet-base
 - `PRD.md` — requirements (FRn/NFRn) and the phased roadmap
 - `.github/` — CI, the `@claude` handler, the `evolve` lane (off by default), issue forms
 - `.claude/agents/builder.md` — the role the evolve lane runs as
-- everything else — the terraform, hcl skeleton
+- `main.tf` — the Terraform root module (`cluster_name` variable, namespace list, outputs)
+- `charts/fleet-base/` — the base Helm chart (placeholder Deployment; CI runs `helm lint` and `helm template` on it)
 
 ## Conventions
 
