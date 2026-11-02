@@ -7,7 +7,7 @@ repo: bamr87/fleet-infra
 
 features:
   - id: FINFRA-001
-    title: "Terraform root module validates and plans with no cloud credentials (l"
+    title: "Terraform root module validates and plans with no cloud credentials"
     description: "Terraform root module validates and plans with no cloud credentials (local backend)."
     implemented: true
     status: shipped

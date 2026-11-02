@@ -25,10 +25,27 @@ Hosts fleet services (ragio-ai, fredgar-ai, law-ai, fleet-observe) and replaces 
 
 ## Quick start
 
+Requires Terraform `>= 1.6` (the `required_version` in `main.tf`) and Helm. Neither step needs cloud credentials or a running cluster.
+
 ```bash
+# Validate the Terraform root module without configuring a backend
 terraform init -backend=false && terraform validate
-helm lint charts/fleet-base
+
+# Lint the base chart and render it locally (the same command the CI `build` job runs)
+helm lint charts/fleet-base && helm template charts/fleet-base
 ```
+
+To see the outputs, run a plain `terraform init` (local state, no credentials) and then `terraform plan`. The plan shows the module's two outputs: `cluster_name` (variable `cluster_name`, default `fleet`) and `namespaces` (`fleet-system`, `fleet-apps`). Override the name with `terraform plan -var cluster_name=<name>`. The module provisions nothing yet; k3s provisioning is FINFRA-003.
+
+## Layout
+
+| Path | What it is |
+| --- | --- |
+| `main.tf` | Terraform root module: the `cluster_name` variable, the namespace list, and their outputs |
+| `charts/fleet-base/` | Base Helm chart; `values.yaml` sets `namespace`, `image` and `replicas`, and `templates/deployment.yaml` renders a placeholder nginx Deployment. It does not render the Namespace object yet (FINFRA-002) |
+| `features/features.yml`, `PRD.md` | Feature catalog (`FINFRA-NNN`) and requirements/roadmap |
+| `docs/` | Constitution, amendments and ADRs |
+| `.github/workflows/` | `ci.yml` (the fleet standard gate plus the Helm `build` job), `claude.yml` (`@claude` handler), `evolve.yml` (the `evolve` lane) |
 
 ## How it grows
 
