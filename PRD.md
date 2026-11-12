@@ -58,7 +58,7 @@ Every user-facing capability has a stable id in the feature catalog [`features/f
 
 | ID | Feature | Status | Where | Requirements |
 | --- | --- | --- | --- | --- |
-| [FINFRA-001](features/features.yml) | Terraform root module validates and plans with no cloud credentials (l | shipped | [`main.tf`](main.tf) | FR1 |
+| [FINFRA-001](features/features.yml) | Terraform root module validates and plans with no cloud credentials | shipped | [`main.tf`](main.tf) | FR1 |
 | [FINFRA-002](features/features.yml) | A base Helm chart lints cleanly and renders a namespace + deployment | planned | [`PRD.md`](PRD.md) | FR2 |
 | [FINFRA-003](features/features.yml) | k3s cluster provisioning module for a local VM (multipass/libvirt) | planned | [`PRD.md`](PRD.md) | FR3 |
 | [FINFRA-004](features/features.yml) | GitOps controller bootstrap that reconciles charts/ from main | planned | [`PRD.md`](PRD.md) | FR4 |
