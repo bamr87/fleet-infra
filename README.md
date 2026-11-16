@@ -44,12 +44,13 @@ To see the outputs, run a plain `terraform init` (local state, no credentials) a
 | `main.tf` | Terraform root module: the `cluster_name` variable, the namespace list, and their outputs |
 | `charts/fleet-base/` | Base Helm chart; `values.yaml` sets `namespace`, `image` and `replicas`, and `templates/deployment.yaml` renders a placeholder nginx Deployment. It does not render the Namespace object yet (FINFRA-002) |
 | `features/features.yml`, `PRD.md` | Feature catalog (`FINFRA-NNN`) and requirements/roadmap |
-| `docs/` | Constitution, amendments and ADRs |
+| `docs/` | Constitution, amendments and ADRs; [docs/README.md](docs/README.md) indexes every document in the repo |
+| `tools/docs_index.py` | Regenerates the index span in `docs/README.md` (`python3 tools/docs_index.py --write`; `--check` exits 1 when it is stale). Vendored from the hub; change it there first |
 | `.github/workflows/` | `ci.yml` (the fleet standard gate plus the Helm `build` job), `claude.yml` (`@claude` handler), `evolve.yml` (the `evolve` lane) |
 
 ## How it grows
 
-The roadmap lives in [PRD.md](PRD.md) and [features/features.yml](features/features.yml) (ids `FINFRA-NNN`, most `status: planned`). Work arrives as pull requests from the hub's evolution and fan-out loops, the `@claude` handler, or the local `evolve` lane (off until `EVOLVE_ENABLED=true`). A human merges every PR. Rules: [docs/constitution.md](docs/constitution.md) · agent guide: [AGENTS.md](AGENTS.md).
+The roadmap lives in [PRD.md](PRD.md) and [features/features.yml](features/features.yml) (ids `FINFRA-NNN`, most `status: planned`). Work arrives as pull requests from the hub's evolution and fan-out loops, the `@claude` handler, or the local `evolve` lane (off until `EVOLVE_ENABLED=true`). A human merges every PR. Rules: [docs/constitution.md](docs/constitution.md) · agent guide: [AGENTS.md](AGENTS.md) · all documents: [docs/README.md](docs/README.md).
 
 ## License
 
