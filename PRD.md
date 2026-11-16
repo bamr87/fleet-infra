@@ -12,6 +12,17 @@ Infrastructure-as-code for running the fleet's services on a small k3s cluster, 
 | --- | --- | --- |
 | 0.1 | 2026-10-28 | Initial requirements and phased roadmap (repo foundation). |
 
+
+## 1.1 Missions
+
+fleet-infra's direction is to become the ultimate open home for all things fleet infrastructure — data, tools, resources and transparency, gathered in one place that anyone can inspect and reuse.
+
+1. **Provide data, tools, resources and transparency for all stakeholders, operators, infrastructure practitioners and the general public.** Operators, learners, service owners, and the general public are first-class audiences. The aim is a shared, open commons: the same sources, the same tools, and the same trail of evidence for everyone.
+2. **Make running the fleet's services declarative, inspectable and reproducible.** Provision with Terraform, run a small k3s cluster, and keep Helm charts in sync from git with a GitOps controller.
+3. **Put that platform in every operator's and learner's hands, and make hosting fleet services a matter of merging git.** The path replaces ad-hoc docker compose on the bench and hosts fleet services such as ragio-ai, fredgar-ai, law-ai and fleet-observe — an open toolkit for working with all things fleet infrastructure.
+
+These missions set the course; they do not claim the work is finished. They serve the existing constitution and PRD purpose: infrastructure-as-code for a small k3s cluster, kept in sync from git. The earlier mission paragraph is absorbed into these three. Every feature must trace to them.
+
 ## 2. Goals
 
 - Provision a reproducible k3s cluster (local VM or cloud) from Terraform
@@ -65,6 +76,7 @@ Every user-facing capability has a stable id in the feature catalog [`features/f
 | [FINFRA-005](features/features.yml) | Per-service Helm charts for fleet apps (ragio-ai, fredgar-ai) | planned | [`PRD.md`](PRD.md) | FR5 |
 | [FINFRA-006](features/features.yml) | Secrets management via SOPS/age, never plaintext in git | planned | [`PRD.md`](PRD.md) | FR6 |
 | [FINFRA-007](features/features.yml) | Standard CI gate | shipped | [`.github/workflows/ci.yml`](.github/workflows/ci.yml) | NFR1 |
+| [FINFRA-008](features/features.yml) | Missions in constitution §1 | planned | [`docs/constitution.md`](docs/constitution.md) | §1.1 |
 
 **Requirement → feature trace**
 
@@ -77,4 +89,5 @@ Every user-facing capability has a stable id in the feature catalog [`features/f
 | FR5 | FINFRA-005 |
 | FR6 | FINFRA-006 |
 | NFR1 | FINFRA-007 |
+| §1.1 | FINFRA-008 |
 <!-- features:end -->
