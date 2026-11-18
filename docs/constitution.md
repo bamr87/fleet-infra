@@ -6,9 +6,17 @@
 > Agents read this before [AGENTS.md](../AGENTS.md) conventions, the [PRD](../PRD.md), or the
 > [feature catalog](../features/features.yml). Ratified by merged PR; amended only per § 8.
 
-## 1. Mission
+## 1. Missions
 
-Infrastructure-as-code for running the fleet's services on a small k3s cluster, provisioned with Terraform and kept in sync from git with Helm and a GitOps controller. It is a learning-first portfolio project in the bamr87 fleet: Hosts fleet services (ragio-ai, fredgar-ai, law-ai, fleet-observe) and replaces ad-hoc docker compose on the bench with declarative deploys.
+fleet-infra's direction is to become the ultimate open home for all things fleet infrastructure — data, tools, resources and transparency, gathered in one place that anyone can inspect and reuse.
+
+1. **Provide data, tools, resources and transparency for all stakeholders, operators, infrastructure practitioners and the general public.** Operators, learners, service owners, and the general public are first-class audiences. The aim is a shared, open commons: the same sources, the same tools, and the same trail of evidence for everyone.
+2. **Make running the fleet's services declarative, inspectable and reproducible.** Provision with Terraform, run a small k3s cluster, and keep Helm charts in sync from git with a GitOps controller.
+3. **Put that platform in every operator's and learner's hands, and make hosting fleet services a matter of merging git.** The path replaces ad-hoc docker compose on the bench and hosts fleet services such as ragio-ai, fredgar-ai, law-ai and fleet-observe — an open toolkit for working with all things fleet infrastructure.
+
+These missions set the course; they do not claim the work is finished. They serve the existing constitution and PRD purpose: infrastructure-as-code for a small k3s cluster, kept in sync from git. The earlier mission paragraph is absorbed into these three. Every feature must trace to them.
+
+_Source: [../PRD.md](../PRD.md) §1.1._
 
 ## 2. Invariants (non-negotiable)
 

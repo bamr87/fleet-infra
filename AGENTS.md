@@ -3,6 +3,8 @@
 
 # fleet-infra
 
+> fleet-infra's direction is to become the ultimate open home for all things fleet infrastructure: data, tools, resources and transparency, with Terraform, k3s and GitOps from git, for everyone ([constitution](docs/constitution.md) §1).
+
 ## What this repo is
 
 GitOps infrastructure for the bamr87 fleet: Terraform/HCL provisioning, a k3s cluster, and Helm charts reconciled from git. Infrastructure-as-code for running the fleet's services on a small k3s cluster, provisioned with Terraform and kept in sync from git with Helm and a GitOps controller.
@@ -12,7 +14,9 @@ GitOps infrastructure for the bamr87 fleet: Terraform/HCL provisioning, a k3s cl
 ## Stack & commands
 
 ```bash
+terraform fmt -check -recursive
 terraform init -backend=false && terraform validate
+terraform test
 helm lint charts/fleet-base
 ```
 
@@ -21,10 +25,11 @@ helm lint charts/fleet-base
 - `docs/` — constitution, amendments, ADRs
 - `features/features.yml` — the feature catalog (prefix `FINFRA-`)
 - `PRD.md` — requirements (FRn/NFRn) and the phased roadmap
-- `.github/` — CI, the `@claude` handler, the `evolve` lane (off by default), issue forms
+- `.github/` — CI (the standard gate plus the Helm `build` and `terraform` jobs), the `@claude` handler, the `evolve` lane (off by default), issue forms
 - `.claude/agents/builder.md` — the role the evolve lane runs as
-- `main.tf` — the Terraform root module (`cluster_name` variable, namespace list, outputs)
-- `charts/fleet-base/` — the base Helm chart (placeholder Deployment; CI runs `helm lint` and `helm template` on it)
+- `main.tf` — the Terraform root module (the validated `cluster_name` variable, the namespace list that is the source of truth for namespace names, outputs)
+- `tests/main.tftest.hcl` — native `terraform test` runs (plan only, no credentials); CI's `terraform` job runs fmt, init, validate and these tests
+- `charts/fleet-base/` — the base Helm chart (the Namespace and a hardened placeholder Deployment, every setting in `values.yaml`; CI runs `helm lint` and `helm template` on it)
 
 ## Conventions
 

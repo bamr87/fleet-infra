@@ -8,22 +8,24 @@ repo: bamr87/fleet-infra
 features:
   - id: FINFRA-001
     title: "Terraform root module validates and plans with no cloud credentials"
-    description: "Terraform root module validates and plans with no cloud credentials (local backend)."
+    description: "Terraform root module validates and plans with no cloud credentials (local backend). CI's `terraform` job gates it on every PR: fmt -check, init -backend=false, validate, and the plan-only native tests in tests/main.tftest.hcl (defaults, the cluster_name validation, the chart's namespace)."
     implemented: true
     status: shipped
     prd: [FR1]
     surface: infra
     link: main.tf
+    tests: [tests/main.tftest.hcl, .github/workflows/ci.yml]
     tags: [phase-1]
     date: 2026-10-28
   - id: FINFRA-002
     title: "A base Helm chart lints cleanly and renders a namespace + deployment"
-    description: "A base Helm chart lints cleanly and renders a namespace + deployment."
-    implemented: false
-    status: planned
+    description: "The fleet-base chart lints cleanly and renders the fleet-apps Namespace (createNamespace, kept on uninstall) and a hardened placeholder Deployment: nginx-unprivileged with probes, resources and a non-root, read-only securityContext, all set in values.yaml. CI's `build` job runs helm lint and helm template on every PR."
+    implemented: true
+    status: shipped
     prd: [FR2]
     surface: infra
-    docs: PRD.md
+    link: charts/fleet-base
+    tests: [.github/workflows/ci.yml, tests/main.tftest.hcl]
     tags: [phase-1]
     date: 2026-10-28
   - id: FINFRA-003
@@ -76,3 +78,11 @@ features:
     link: .github/workflows/ci.yml
     tags: [ci]
     date: 2026-10-28
+  - id: FINFRA-008
+    title: "Missions in constitution §1"
+    description: "Three product missions under one direction statement, ratified through amendment 0002."
+    implemented: false
+    status: planned
+    prd: ["§1.1"]
+    surface: docs
+    docs: "docs/constitution.md"
