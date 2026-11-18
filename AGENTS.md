@@ -3,6 +3,8 @@
 
 # fleet-infra
 
+> fleet-infra's direction is to become the ultimate open home for all things fleet infrastructure: data, tools, resources and transparency, with Terraform, k3s and GitOps from git, for everyone ([constitution](docs/constitution.md) §1).
+
 ## What this repo is
 
 GitOps infrastructure for the bamr87 fleet: Terraform/HCL provisioning, a k3s cluster, and Helm charts reconciled from git. Infrastructure-as-code for running the fleet's services on a small k3s cluster, provisioned with Terraform and kept in sync from git with Helm and a GitOps controller.
