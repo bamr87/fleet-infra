@@ -55,12 +55,13 @@ The placeholder runs `nginxinc/nginx-unprivileged` instead of the stock `nginx` 
 | `tests/` | `main.tftest.hcl`: native `terraform test` runs, all plan-only, for the defaults, the `cluster_name` validation and the chart's namespace |
 | `charts/fleet-base/` | Base Helm chart (FINFRA-002); `values.yaml` holds every setting (`namespace`, `createNamespace`, `image`, `replicas`, `containerPort`, `resources`, the probes and the security contexts), `templates/namespace.yaml` renders the Namespace, and `templates/deployment.yaml` renders the hardened placeholder nginx Deployment |
 | `features/features.yml`, `PRD.md` | Feature catalog (`FINFRA-NNN`) and requirements/roadmap |
-| `docs/` | Constitution, amendments and ADRs |
+| `docs/` | Constitution, amendments and ADRs; [docs/README.md](docs/README.md) indexes every document in the repo |
+| `tools/docs_index.py` | Regenerates the index span in `docs/README.md` (`python3 tools/docs_index.py --write`; `--check` exits 1 when it is stale). Vendored from the hub; change it there first |
 | `.github/workflows/` | `ci.yml` (the fleet standard gate, the Helm `build` job and the `terraform` job: fmt, init, validate, test), `claude.yml` (`@claude` handler), `evolve.yml` (the `evolve` lane) |
 
 ## How it grows
 
-The roadmap lives in [PRD.md](PRD.md) and [features/features.yml](features/features.yml) (ids `FINFRA-NNN`, most `status: planned`). Work arrives as pull requests from the hub's evolution and fan-out loops, the `@claude` handler, or the local `evolve` lane (off until `EVOLVE_ENABLED=true`). A human merges every PR. Rules: [docs/constitution.md](docs/constitution.md) · agent guide: [AGENTS.md](AGENTS.md).
+The roadmap lives in [PRD.md](PRD.md) and [features/features.yml](features/features.yml) (ids `FINFRA-NNN`, most `status: planned`). Work arrives as pull requests from the hub's evolution and fan-out loops, the `@claude` handler, or the local `evolve` lane (off until `EVOLVE_ENABLED=true`). A human merges every PR. Rules: [docs/constitution.md](docs/constitution.md) · agent guide: [AGENTS.md](AGENTS.md) · all documents: [docs/README.md](docs/README.md).
 
 ## License
 
