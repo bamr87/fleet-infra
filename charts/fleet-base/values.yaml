@@ -1,5 +1,46 @@
+# Namespace for the chart's objects. main.tf `local.namespaces` is the source of
+# truth for namespace names: this value must be one of them (tests/main.tftest.hcl).
 namespace: fleet-apps
+# Render the Namespace object (templates/namespace.yaml). Set it to false when the
+# namespace already exists, or when installing with `-n <namespace> --create-namespace`.
+createNamespace: true
+
+# nginx-unprivileged listens on 8080 and runs as uid 101, so it starts under the
+# hardened securityContext below; the stock nginx image needs root.
 image:
-  repository: nginx
+  repository: nginxinc/nginx-unprivileged
   tag: "1.27-alpine"
 replicas: 1
+containerPort: 8080
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 32Mi
+  limits:
+    cpu: 100m
+    memory: 128Mi
+
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 101
+  runAsGroup: 101
+
+# The root filesystem is read-only; templates/deployment.yaml mounts an emptyDir
+# at /tmp, where nginx-unprivileged keeps its pid file and temp paths.
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop: [ALL]
+  seccompProfile:
+    type: RuntimeDefault

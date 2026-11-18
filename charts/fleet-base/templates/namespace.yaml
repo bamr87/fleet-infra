@@ -1,0 +1,12 @@
+{{- if .Values.createNamespace }}
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Values.namespace }}
+  labels:
+    app: {{ .Chart.Name }}
+  annotations:
+    # Keep the namespace, and everything running in it, on `helm uninstall` or
+    # when createNamespace is turned off later.
+    helm.sh/resource-policy: keep
+{{- end }}

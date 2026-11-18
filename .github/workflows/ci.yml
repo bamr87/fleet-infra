@@ -30,3 +30,23 @@ jobs:
       - uses: actions/checkout@v7
       - uses: azure/setup-helm@v5
       - run: 'helm lint charts/fleet-base && helm template charts/fleet-base >/dev/null'
+
+  # The Terraform gate for FINFRA-001: format, initialise without a backend,
+  # validate, then run the native tests in tests/ (plan only). None of it needs
+  # a provider, state, lockfile or cloud credential.
+  terraform:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_wrapper: false
+      - name: Format
+        run: terraform fmt -check -recursive -diff
+      - name: Init (no backend)
+        run: terraform init -backend=false -input=false
+      - name: Validate
+        run: terraform validate
+      - name: Test
+        run: terraform test

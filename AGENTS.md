@@ -12,7 +12,9 @@ GitOps infrastructure for the bamr87 fleet: Terraform/HCL provisioning, a k3s cl
 ## Stack & commands
 
 ```bash
+terraform fmt -check -recursive
 terraform init -backend=false && terraform validate
+terraform test
 helm lint charts/fleet-base
 ```
 
@@ -21,10 +23,11 @@ helm lint charts/fleet-base
 - `docs/` — constitution, amendments, ADRs
 - `features/features.yml` — the feature catalog (prefix `FINFRA-`)
 - `PRD.md` — requirements (FRn/NFRn) and the phased roadmap
-- `.github/` — CI, the `@claude` handler, the `evolve` lane (off by default), issue forms
+- `.github/` — CI (the standard gate plus the Helm `build` and `terraform` jobs), the `@claude` handler, the `evolve` lane (off by default), issue forms
 - `.claude/agents/builder.md` — the role the evolve lane runs as
-- `main.tf` — the Terraform root module (`cluster_name` variable, namespace list, outputs)
-- `charts/fleet-base/` — the base Helm chart (placeholder Deployment; CI runs `helm lint` and `helm template` on it)
+- `main.tf` — the Terraform root module (the validated `cluster_name` variable, the namespace list that is the source of truth for namespace names, outputs)
+- `tests/main.tftest.hcl` — native `terraform test` runs (plan only, no credentials); CI's `terraform` job runs fmt, init, validate and these tests
+- `charts/fleet-base/` — the base Helm chart (the Namespace and a hardened placeholder Deployment, every setting in `values.yaml`; CI runs `helm lint` and `helm template` on it)
 
 ## Conventions
 
