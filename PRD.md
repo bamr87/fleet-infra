@@ -11,6 +11,7 @@ Infrastructure-as-code for running the fleet's services on a small k3s cluster, 
 | Version | Date | Notes |
 | --- | --- | --- |
 | 0.1 | 2026-10-28 | Initial requirements and phased roadmap (repo foundation). |
+| 0.2 | 2026-11-26 | §1.1 Missions (amendment 0002, ratified in #12); FR7–FR9 planned from the cycle 1 day 28 deep dive. |
 
 
 ## 1.1 Missions
@@ -50,11 +51,14 @@ Phases are the build order: an agent picks the earliest unserved requirement fir
 
 - FR3: k3s cluster provisioning module for a local VM (multipass/libvirt)
 - FR4: GitOps controller bootstrap that reconciles charts/ from main
+- FR7: CI validates rendered chart manifests against the Kubernetes schema and a checked-in policy baseline, and scans the Terraform and charts for misconfiguration (#19)
+- FR8: CI installs every chart on an ephemeral k3s cluster and runs its helm test (#20)
 
 ### 4.3 Phase 3 — Fleet integration
 
 - FR5: Per-service Helm charts for fleet apps (ragio-ai, fredgar-ai)
 - FR6: Secrets management via SOPS/age, never plaintext in git
+- FR9: Every fleet namespace enforces the restricted Pod Security Standard and a default-deny NetworkPolicy (#21)
 
 ### 4.4 Non-functional
 
@@ -76,7 +80,10 @@ Every user-facing capability has a stable id in the feature catalog [`features/f
 | [FINFRA-005](features/features.yml) | Per-service Helm charts for fleet apps (ragio-ai, fredgar-ai) | planned | [`PRD.md`](PRD.md) | FR5 |
 | [FINFRA-006](features/features.yml) | Secrets management via SOPS/age, never plaintext in git | planned | [`PRD.md`](PRD.md) | FR6 |
 | [FINFRA-007](features/features.yml) | Standard CI gate | shipped | [`.github/workflows/ci.yml`](.github/workflows/ci.yml) | NFR1 |
-| [FINFRA-008](features/features.yml) | Missions in constitution §1 | planned | [`docs/constitution.md`](docs/constitution.md) | §1.1 |
+| [FINFRA-008](features/features.yml) | Missions in constitution §1 | shipped | [`docs/constitution.md`](docs/constitution.md) | §1.1 |
+| [FINFRA-009](features/features.yml) | Rendered-manifest and IaC policy gate in CI | planned | [`PRD.md`](PRD.md) | FR7 |
+| [FINFRA-010](features/features.yml) | Ephemeral k3d smoke install of every chart in CI | planned | [`PRD.md`](PRD.md) | FR8 |
+| [FINFRA-011](features/features.yml) | Namespace security baseline: restricted Pod Security labels and default-deny NetworkPolicy | planned | [`PRD.md`](PRD.md) | FR9 |
 
 **Requirement → feature trace**
 
@@ -90,4 +97,7 @@ Every user-facing capability has a stable id in the feature catalog [`features/f
 | FR6 | FINFRA-006 |
 | NFR1 | FINFRA-007 |
 | §1.1 | FINFRA-008 |
+| FR7 | FINFRA-009 |
+| FR8 | FINFRA-010 |
+| FR9 | FINFRA-011 |
 <!-- features:end -->
