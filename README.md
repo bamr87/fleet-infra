@@ -57,7 +57,8 @@ The placeholder runs `nginxinc/nginx-unprivileged` instead of the stock `nginx` 
 | `features/features.yml`, `PRD.md` | Feature catalog (`FINFRA-NNN`) and requirements/roadmap |
 | `docs/` | Constitution, amendments and ADRs; [docs/README.md](docs/README.md) indexes every document in the repo |
 | `tools/docs_index.py` | Regenerates the index span in `docs/README.md` (`python3 tools/docs_index.py --write`; `--check` exits 1 when it is stale). Vendored from the hub; change it there first |
-| `.github/workflows/` | `ci.yml` (the fleet standard gate, the Helm `build` job and the `terraform` job: fmt, init, validate, test), `claude.yml` (`@claude` handler), `evolve.yml` (the `evolve` lane) |
+| `.github/workflows/` | `ci.yml` (the fleet standard gate, the Helm `build` job and the `terraform` job: fmt, init, validate, test), `conformance.yml` (the hub's Universal Project Standard checker, advisory), `markdown-oneline.yml` (one paragraph per line; fixes the PR branch itself), `pr-review.yml` (one sticky comment summarising failing CI on a PR), `claude.yml` (`@claude` handler), `evolve.yml` (the `evolve` lane, calling the hub's `ai-lane.yml@v2`) |
+| `tools/unwrap-prose.py` | The unwrapper `markdown-oneline.yml` runs; fix locally with `python3 tools/unwrap-prose.py --write`. Vendored from the hub |
 
 ## How it grows
 
