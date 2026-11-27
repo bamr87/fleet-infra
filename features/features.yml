@@ -80,9 +80,39 @@ features:
     date: 2026-10-28
   - id: FINFRA-008
     title: "Missions in constitution §1"
-    description: "Three product missions under one direction statement, ratified through amendment 0002."
-    implemented: false
-    status: planned
+    description: "Three product missions under one direction statement, ratified through amendment 0002 (merged in #12)."
+    implemented: true
+    status: shipped
     prd: ["§1.1"]
     surface: docs
     docs: "docs/constitution.md"
+  - id: FINFRA-009
+    title: "Rendered-manifest and IaC policy gate in CI"
+    description: "CI validates the rendered charts against the Kubernetes schema (kubeconform), lints them against a checked-in kube-linter policy that keeps the hardened securityContext, and scans main.tf and the charts with an IaC scanner (trivy config or checkov), advisory first. Issue #19."
+    implemented: false
+    status: planned
+    prd: [FR7]
+    surface: infra
+    docs: PRD.md
+    tags: [phase-2, deep-dive]
+    date: 2026-11-26
+  - id: FINFRA-010
+    title: "Ephemeral k3d smoke install of every chart in CI"
+    description: "A CI job starts a throwaway k3s-in-docker cluster, installs each chart with --wait, and runs helm test, so a chart that renders but cannot start fails the PR. Issue #20."
+    implemented: false
+    status: planned
+    prd: [FR8]
+    surface: infra
+    docs: PRD.md
+    tags: [phase-2, deep-dive]
+    date: 2026-11-26
+  - id: FINFRA-011
+    title: "Namespace security baseline: restricted Pod Security labels and default-deny NetworkPolicy"
+    description: "Every fleet namespace enforces the restricted Pod Security Standard and starts from a default-deny NetworkPolicy with DNS egress allowed; service charts add explicit allow rules. Issue #21."
+    implemented: false
+    status: planned
+    prd: [FR9]
+    surface: infra
+    docs: PRD.md
+    tags: [phase-3, deep-dive]
+    date: 2026-11-26
